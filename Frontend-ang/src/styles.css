@@ -1,0 +1,12 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Forcer les styles globaux */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: visible;
+}
+.container{
+  padding: 10px;
+}

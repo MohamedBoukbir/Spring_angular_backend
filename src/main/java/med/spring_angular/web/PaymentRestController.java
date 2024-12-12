@@ -1,6 +1,7 @@
 package med.spring_angular.web;
 
 import lombok.AllArgsConstructor;
+import med.spring_angular.dtos.PaymentDTO;
 import med.spring_angular.entities.*;
 import med.spring_angular.repository.PaymentRepository;
 import med.spring_angular.repository.StudentRepository;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin("*")
 public class PaymentRestController {
     private StudentRepository studentRepository;
     private PaymentRepository paymentRepository;
@@ -69,15 +71,15 @@ public Payment updatePaymentStatus(@PathVariable Long  id,@RequestParam PaymentS
 }
 
 @PostMapping(value = "/payments",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public Payment savePayment(@RequestParam MultipartFile file , LocalDate date ,
-                           double amount ,PaymentType type,String studentCode ) throws IOException {
+public Payment savePayment(@RequestParam("file") MultipartFile file , PaymentDTO  paymentDTO) throws IOException {
 
-    return this.paymentService.savePayment(file,date,amount,type,studentCode);
+    return this.paymentService.savePayment(file,paymentDTO);
 }
 
-@GetMapping(path="/payment/file/{paymentId}",produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+@GetMapping(path="/payment/{paymentId}/file",produces = MediaType.MULTIPART_FORM_DATA_VALUE)
 public byte[] getPaymentFile(@PathVariable Long paymentId) throws IOException {
     return paymentService.getPaymentFile(paymentId);
 
 }
+
 }

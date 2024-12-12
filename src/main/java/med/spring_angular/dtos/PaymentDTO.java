@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class PaymentDTO {
-    private Long  id;
+    private String   studentCode;
     private LocalDate date;
     private Double amount;
     private PaymentType type;

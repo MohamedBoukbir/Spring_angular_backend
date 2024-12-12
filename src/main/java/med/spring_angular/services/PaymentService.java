@@ -1,6 +1,7 @@
 package med.spring_angular.services;
 
 import lombok.AllArgsConstructor;
+import med.spring_angular.dtos.PaymentDTO;
 import med.spring_angular.entities.Payment;
 import med.spring_angular.entities.PaymentStatus;
 import med.spring_angular.entities.PaymentType;
@@ -28,8 +29,7 @@ public class PaymentService {
     private StudentRepository studentRepository;
     private PaymentRepository paymentRepository;
 
-    public Payment savePayment( MultipartFile file , LocalDate date ,
-                               double amount , PaymentType type, String studentCode ) throws IOException {
+    public Payment savePayment( MultipartFile file , PaymentDTO paymentDTO ) throws IOException {
 
         Path folderPath = Paths.get(System.getProperty("user.home"),"fs-data","payments");
         if (!Files.exists(folderPath)){
@@ -38,10 +38,10 @@ public class PaymentService {
         String fileName = UUID.randomUUID().toString();
         Path folePath = Paths.get(System.getProperty("user.home"),"fs-data","payments",fileName+".pdf");
         Files.copy(file.getInputStream(),folePath);
-        Student student=studentRepository.findByCode(studentCode);
+        Student student=studentRepository.findByCode(paymentDTO.getStudentCode());
         Payment payment=Payment.builder()
-                .date(date).type(type).student(student)
-                .amount(amount)
+                .date(paymentDTO.getDate()).type(paymentDTO.getType()).student(student)
+                .amount(paymentDTO.getAmount())
                 .file(folePath.toUri().toString())
                 .status(PaymentStatus.CREATED)
                 .build();
