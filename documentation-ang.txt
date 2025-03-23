@@ -1,0 +1,57 @@
+//cree un nevaux projet
+
+=>  ng new frontend-ang-app --directory=./ --no-standalone       // choiser css apre faire no 
+  
+// runner le projet 
+=> ng serve
+
+// installer materail angular 
+
+=> ng add @angular/material  // entrer y enter 
+ 
+
+// pour cree un compenets :
+
+=> ng g c admin-template
+
+
+// pour cree un services:
+
+=> ng g s services/auth
+
+// pour cree un guard pour proteger les route 
+=> ng g g guards/auth  
+
+// dans le cas d'errro
+=> ng generate guard guards/auth --implements CanActivate 
+
+// pour crree un dosier de environment
+
+=>  ng g environments
+
+
+// pour affichier des pdf tu doit installe  :
+=> npm install ng2-pdf-viewer 
+
+
+// pour intsaller bootstrap 
+=> npm i bootstrap --save
+
+//pour installer les icone de bootstrap 
+=> npm i bootstrap-icons --save
+
+
+// pour installer angular 17 et cli 17 
+
+=> npm install @angular/cdk@17.0.0 @angular/material@17.0.0
+=> suprimer node_model 
+=> npm cache clean --force
+=> npm install
+
+
+// pour utiliser jwt:
+npm install jwt-decode
+
+
+//pour ajouter un interceptor
+ng g interceptor interceptors/app-http
